@@ -8,3 +8,8 @@ boostrap in the CDN links in the public html pages
 			integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
 			crossorigin="anonymous"
 		/>
+
+
+
+
+npm i react-hot-toast
