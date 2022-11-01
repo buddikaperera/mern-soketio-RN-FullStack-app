@@ -5,19 +5,22 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import PageNotFound from './pages/PageNotFound';
 import Main from './components/nav/Main';
+import { AuthProvider } from './context/auth';
 
 function App() {
 	return (
-		<BrowserRouter>
-			<Main />
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/register" element={<Register />} />
+		<AuthProvider>
+			<BrowserRouter>
+				<Main />
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/register" element={<Register />} />
 
-				<Route path="/login" element={<Login />} />
-				<Route path="*" element={<PageNotFound />} />
-			</Routes>
-		</BrowserRouter>
+					<Route path="/login" element={<Login />} />
+					<Route path="*" element={<PageNotFound />} />
+				</Routes>
+			</BrowserRouter>
+		</AuthProvider>
 	);
 }
 
