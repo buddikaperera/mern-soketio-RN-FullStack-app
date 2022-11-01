@@ -1,17 +1,32 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Input from '../components/forms/Input';
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
+import { AuthContext } from '../context/auth';
+import { saveInLocalStorage } from '../helpers/auth';
+import { useNavigate } from 'react-router-dom';
+import Button from '../components/forms/Button';
+
 function Login() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+
+	const [auth, setAuth] = useContext(AuthContext);
+
+	const navigate = useNavigate();
+
+	console.log('context ====>', auth);
+
+	const toastId = React.useRef(null);
+
+	///console.log('API', process.env.REACT_APP_API);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		try {
 			const { data } = await axios.post(
-				'http://localhost:8000/api/users/login',
+				`${process.env.REACT_APP_API}/signin`,
 				{
 					email,
 					password,
@@ -19,12 +34,19 @@ function Login() {
 			);
 
 			if (data.error) {
-				toast.error(data.error);
+				toast.error(data.error, { isOpen: false });
 				return '';
 			} else {
-				toast.success(data.success);
+				///toast.success('User successfully registered..!');
 				///window.location.href('/login');
+
+				setAuth(data);
+				//localStorage.setItem('auth', JSON.stringify(data));
+				saveInLocalStorage('auth', data);
 				console.log(data);
+				///setTimeout(() => {
+				navigate('/');
+				///}, 1500);
 			}
 		} catch (error) {
 			console.log('error', error);
@@ -55,14 +77,14 @@ function Login() {
 								label="Password"
 							/>
 
-							<button
-								onClick={handleSubmit}
+							<Button
+								handleSubmit={handleSubmit}
 								type="submit"
-								className="btn btn-primary"
-								disabled={!email || !password}
-							>
-								Submit
-							</button>
+								clsName="btn btn-primary"
+								email={email}
+								password={password}
+								btnLabel="Submit"
+							/>
 						</form>
 					</div>
 				</div>

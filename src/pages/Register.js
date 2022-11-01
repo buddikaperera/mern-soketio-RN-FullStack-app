@@ -5,6 +5,7 @@ import axios from 'axios';
 import { AuthContext } from '../context/auth';
 import { saveInLocalStorage } from '../helpers/auth';
 import { useNavigate } from 'react-router-dom';
+import Button from '../components/forms/Button';
 
 function Register() {
 	const [email, setEmail] = useState('');
@@ -101,19 +102,14 @@ function Register() {
 								label="Confirm Password"
 							/>
 
-							<button
-								onClick={handleSubmit}
+							<Button
+								handleSubmit={handleSubmit}
 								type="submit"
-								className="btn btn-primary"
-								disabled={
-									!email ||
-									!password ||
-									!name ||
-									!confirmPassword
-								}
-							>
-								Submit
-							</button>
+								clsName="btn btn-primary"
+								email={email}
+								password={password}
+								btnLabel="Submit"
+							/>
 						</form>
 					</div>
 				</div>
