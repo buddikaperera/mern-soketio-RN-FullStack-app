@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 import Input from '../components/forms/Input';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import axios from 'axios';
 import { AuthContext } from '../context/auth';
 import { saveInLocalStorage } from '../helpers/auth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../components/forms/Button';
 
 function Register() {
@@ -14,6 +14,7 @@ function Register() {
 	const [confirmPassword, setConfirmPassword] = useState('');
 
 	const [auth, setAuth] = useContext(AuthContext);
+	const [loading, setLoading] = useState(false);
 
 	const navigate = useNavigate();
 
@@ -27,10 +28,13 @@ function Register() {
 		e.preventDefault();
 
 		try {
+			setLoading(true);
 			if (password !== confirmPassword) {
+				setLoading(false);
 				toast.error(
 					'Password does not match with the confirm password!'
 				);
+
 				return '';
 			} else {
 				//console.log('done', { name, email, password, confirmPassword });
@@ -46,6 +50,7 @@ function Register() {
 
 				if (data.error) {
 					toast.error(data.error, { isOpen: false });
+					setLoading(false);
 					return '';
 				} else {
 					toast.success('User successfully registered..!');
@@ -54,6 +59,7 @@ function Register() {
 					setAuth(data);
 					//localStorage.setItem('auth', JSON.stringify(data));
 					saveInLocalStorage('auth', data);
+					setLoading(false);
 					console.log(data);
 					setTimeout(() => {
 						navigate('/');
@@ -62,6 +68,7 @@ function Register() {
 			}
 		} catch (error) {
 			console.log('error', error);
+			setLoading(false);
 		}
 	};
 
@@ -70,7 +77,6 @@ function Register() {
 			className="d-flex justify-content-center align-items-center vh-100"
 			style={{ marginTop: '-45px' }}
 		>
-			<Toaster />
 			<div className="container">
 				<div className="row">
 					<div className="col-md-6 offset-md-3">
@@ -109,8 +115,12 @@ function Register() {
 								email={email}
 								password={password}
 								btnLabel="Submit"
+								loading={loading}
 							/>
 						</form>
+						<p className="mt-3">
+							Already Registered ? <Link to="/login">Login</Link>
+						</p>
 					</div>
 				</div>
 			</div>

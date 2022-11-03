@@ -15,3 +15,13 @@ export const getFromLocalStorage = (key) => {
 export const saveInLocalStorage = (key, value) => {
 	localStorage.setItem(key, JSON.stringify(value));
 };
+
+///remove item
+
+export const removeFromLocalStorage = () => {
+	const auth = localStorage.getItem('auth');
+
+	if (auth) {
+		localStorage.removeItem('auth');
+	}
+};

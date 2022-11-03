@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 import Input from '../components/forms/Input';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import axios from 'axios';
 import { AuthContext } from '../context/auth';
 import { saveInLocalStorage } from '../helpers/auth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../components/forms/Button';
 
 function Login() {
@@ -12,6 +12,7 @@ function Login() {
 	const [password, setPassword] = useState('');
 
 	const [auth, setAuth] = useContext(AuthContext);
+	const [loading, setLoading] = useState(false);
 
 	const navigate = useNavigate();
 
@@ -25,6 +26,7 @@ function Login() {
 		e.preventDefault();
 
 		try {
+			setLoading(true);
 			const { data } = await axios.post(
 				`${process.env.REACT_APP_API}/signin`,
 				{
@@ -35,6 +37,7 @@ function Login() {
 
 			if (data.error) {
 				toast.error(data.error, { isOpen: false });
+				setLoading(false);
 				return '';
 			} else {
 				///toast.success('User successfully registered..!');
@@ -44,12 +47,14 @@ function Login() {
 				//localStorage.setItem('auth', JSON.stringify(data));
 				saveInLocalStorage('auth', data);
 				console.log(data);
+				setLoading(false);
 				///setTimeout(() => {
 				navigate('/');
 				///}, 1500);
 			}
 		} catch (error) {
 			console.log('error', error);
+			setLoading(false);
 		}
 	};
 
@@ -58,7 +63,6 @@ function Login() {
 			className="d-flex justify-content-center align-items-center vh-100"
 			style={{ marginTop: '-45px' }}
 		>
-			<Toaster />
 			<div className="container">
 				<div className="row">
 					<div className="col-md-6 offset-md-3">
@@ -84,8 +88,12 @@ function Login() {
 								email={email}
 								password={password}
 								btnLabel="Submit"
+								loading={loading}
 							/>
 						</form>
+						<p className="mt-3">
+							<Link to="/forgot-password">Forgot password?</Link>
+						</p>
 					</div>
 				</div>
 			</div>

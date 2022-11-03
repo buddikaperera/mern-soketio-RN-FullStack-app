@@ -6,15 +6,22 @@ import Login from './pages/Login';
 import PageNotFound from './pages/PageNotFound';
 import Main from './components/nav/Main';
 import { AuthProvider } from './context/auth';
+import ForgotPassword from './pages/ForgotPassword';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
 	return (
 		<AuthProvider>
 			<BrowserRouter>
 				<Main />
+				<Toaster />
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/register" element={<Register />} />
+					<Route
+						path="/forgot-password"
+						element={<ForgotPassword />}
+					/>
 
 					<Route path="/login" element={<Login />} />
 					<Route path="*" element={<PageNotFound />} />
