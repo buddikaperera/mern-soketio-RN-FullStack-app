@@ -49,7 +49,7 @@ function Login() {
 				console.log(data);
 				setLoading(false);
 				///setTimeout(() => {
-				navigate('/');
+				navigate('/dashboard');
 				///}, 1500);
 			}
 		} catch (error) {

@@ -62,7 +62,7 @@ function Register() {
 					setLoading(false);
 					console.log(data);
 					setTimeout(() => {
-						navigate('/');
+						navigate('/dashboard');
 					}, 1500);
 				}
 			}
