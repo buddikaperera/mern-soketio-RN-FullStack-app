@@ -16,7 +16,7 @@ function App() {
 		<AuthProvider>
 			<BrowserRouter>
 				<Main />
-				<Toaster />
+				<Toaster toastOptions={{ duration: 2000 }} />
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/dashboard" element={<PrivateRoute />}>

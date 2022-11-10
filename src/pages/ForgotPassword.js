@@ -35,12 +35,9 @@ function ForgotPassword() {
 			//	return '';
 			//} else {
 			//console.log('done', { name, email, password, confirmPassword });
-			const { data } = await axios.post(
-				`${process.env.REACT_APP_API}/forgot-password`,
-				{
-					email,
-				}
-			);
+			const { data } = await axios.post(`/forgot-password`, {
+				email,
+			});
 
 			if (data.error) {
 				toast.error(data.error, { isOpen: false });
@@ -77,15 +74,12 @@ function ForgotPassword() {
 				return '';
 			} else {
 				//console.log('done', { name, email, password, confirmPassword });
-				const { data } = await axios.post(
-					`${process.env.REACT_APP_API}/reset-password`,
-					{
-						email,
-						resetCode,
-						password,
-						confirmPassword,
-					}
-				);
+				const { data } = await axios.post(`/reset-password`, {
+					email,
+					resetCode,
+					password,
+					confirmPassword,
+				});
 
 				if (data.error) {
 					toast.error(data.error, { isOpen: false });

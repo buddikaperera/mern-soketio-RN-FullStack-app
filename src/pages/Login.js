@@ -27,20 +27,17 @@ function Login() {
 
 		try {
 			setLoading(true);
-			const { data } = await axios.post(
-				`${process.env.REACT_APP_API}/signin`,
-				{
-					email,
-					password,
-				}
-			);
+			const { data } = await axios.post(`/signin`, {
+				email,
+				password,
+			});
 
 			if (data.error) {
 				toast.error(data.error, { isOpen: false });
 				setLoading(false);
 				return '';
 			} else {
-				///toast.success('User successfully registered..!');
+				toast.success('Successfully logged in ..!');
 				///window.location.href('/login');
 
 				setAuth(data);

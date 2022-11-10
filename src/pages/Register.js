@@ -38,15 +38,12 @@ function Register() {
 				return '';
 			} else {
 				//console.log('done', { name, email, password, confirmPassword });
-				const { data } = await axios.post(
-					`${process.env.REACT_APP_API}/signup`,
-					{
-						name,
-						email,
-						password,
-						confirmPassword,
-					}
-				);
+				const { data } = await axios.post(`/signup`, {
+					name,
+					email,
+					password,
+					confirmPassword,
+				});
 
 				if (data.error) {
 					toast.error(data.error, { isOpen: false });

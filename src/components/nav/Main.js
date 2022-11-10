@@ -30,6 +30,12 @@ function Main() {
 						</a>
 						<ul className="dropdown-menu">
 							<li>
+								<NavLink className="nav-link" to="/dashboard">
+									Dashboard
+								</NavLink>
+							</li>
+
+							<li>
 								<NavLink
 									className="nav-link"
 									to="/login"
