@@ -1,9 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Dashboard() {
 	return (
-		<div>
-			<h2 className="pt-5">User Dashboard</h2>
+		<div className="d-flex justify-content-center align-items-center vh-100">
+			<Link
+				className="btn btn-outline-primary btn-lg"
+				to="/dashboard/tasks"
+			>
+				Go to Tasks
+			</Link>
 		</div>
 	);
 }
