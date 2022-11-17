@@ -3,6 +3,11 @@
 	--secondary: #ac4425;
 }
 
+.taskList:hover {
+	background-color: rgba(0, 0, 0, 0.23) !important;
+	border: 1px solid rgba(0, 0, 0, 0.23) !important;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 body {
 	margin: 0;

@@ -13,3 +13,8 @@ boostrap in the CDN links in the public html pages
 
 
 npm i react-hot-toast
+
+use ant design modal
+>npm i antd
+https://ant.design/docs/react/introduce
+import 'antd/dist/antd.css'; // or 'antd/dist/antd.less' in index.js
