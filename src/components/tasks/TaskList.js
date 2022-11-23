@@ -4,6 +4,9 @@ import { AuthContext } from '../../context/auth';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import axios from 'axios';
+
+import useSearch from '../../hooks/useSearch';
+
 //dayjs.extend(require('dayjs/plugin/relativeTime'));
 dayjs.extend(relativeTime);
 const TaskList = () => {
@@ -12,11 +15,15 @@ const TaskList = () => {
 	const [total, setTotal] = useState(0);
 	const [page, setPage] = useState(1);
 	const [loading, setLoading] = useState(false);
-	const [keyword, setKeyword] = useState('');
 
-	const filterTask = task?.tasks?.filter((t) =>
-		t.task.toLowerCase().includes(keyword)
-	);
+	//const [keyword, setKeyword] = useState('');
+
+	//const filterTask = task?.tasks?.filter((t) =>
+	//t.task.toLowerCase().includes(keyword)
+	//);
+	///custom hook
+
+	const { keyword, setKeyword, filterTask } = useSearch();
 
 	const getTotal = async () => {
 		try {
