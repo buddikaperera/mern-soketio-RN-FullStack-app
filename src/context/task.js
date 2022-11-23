@@ -3,7 +3,7 @@ import { createContext, useState } from 'react';
 const TaskContext = createContext();
 
 const TaskProvider = ({ children }) => {
-	const [task, setTask] = useState({ tasks: [], selected: {} });
+	const [task, setTask] = useState({ tasks: [], selected: null });
 
 	return (
 		<TaskContext.Provider value={[task, setTask]}>

@@ -13,7 +13,7 @@ function CreateTask() {
 		try {
 			const { data } = await axios.post('/task', { content });
 			console.log('data>>>>', data);
-			setTask({ ...task, tasks: [data, task.tasks] });
+			setTask({ ...task, tasks: [data, ...task.tasks] });
 			setContent('');
 		} catch (error) {
 			console.log('error', error);

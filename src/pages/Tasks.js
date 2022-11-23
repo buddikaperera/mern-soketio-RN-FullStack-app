@@ -3,6 +3,7 @@ import axios from 'axios';
 import { TaskContext } from '../context/task';
 import CreateTask from '../components/tasks/CreateTask';
 import TaskList from '../components/tasks/TaskList';
+import UpdateTask from '../components/tasks/UpdateTask';
 
 function Tasks() {
 	const [task, setTask] = useContext(TaskContext);
@@ -23,6 +24,7 @@ function Tasks() {
 	return (
 		<React.Fragment>
 			<CreateTask />
+			<UpdateTask  />
 			<TaskList />
 		</React.Fragment>
 	);
