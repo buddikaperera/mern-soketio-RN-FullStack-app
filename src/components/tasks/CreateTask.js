@@ -22,22 +22,31 @@ function CreateTask() {
 
 	return (
 		<React.Fragment>
-			<form
-				className="d-flex justify-content-center"
-				onSubmit={handleSubmit}
-			>
-				<textarea
-					maxLength="160"
-					className="form-control m-1"
-					value={content}
-					placeholder="write some text"
-					onChange={(e) => setContent(e.target.value)}
-				/>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 offset-md-3">
+						<form
+							className="d-flex justify-content"
+							onSubmit={handleSubmit}
+						>
+							<textarea
+								maxLength="160"
+								className="form-control m-1"
+								value={content}
+								placeholder="write some text"
+								onChange={(e) => setContent(e.target.value)}
+							/>
 
-				<button type="submit" className="btn btn-primary  m-1">
-					Submit
-				</button>
-			</form>
+							<button
+								type="submit"
+								className="btn btn-warning  m-1"
+							>
+								Submit
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
 		</React.Fragment>
 	);
 }

@@ -14,7 +14,7 @@ function Tasks() {
 
 	const getAllTasks = async () => {
 		try {
-			const { data } = await axios.get('/tasks');
+			const { data } = await axios.get('/tasks/1');
 			console.log('data>>>>', data);
 			setTask({ ...task, tasks: data });
 		} catch (error) {
@@ -24,7 +24,7 @@ function Tasks() {
 	return (
 		<React.Fragment>
 			<CreateTask />
-			<UpdateTask  />
+			<UpdateTask />
 			<TaskList />
 		</React.Fragment>
 	);
