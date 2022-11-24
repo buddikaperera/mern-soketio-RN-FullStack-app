@@ -1,8 +1,20 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
+
 import { TaskContext } from '../../context/task';
+//import io from 'socket.io-client';
+import socket from '../../socket';
 
 function CreateTask() {
+	//const socket = io(
+	//	process.env.REACT_APP_SOCKET,
+	//{
+	//path: '/socket.io',
+	//},
+	//{ reconnection: true }
+	//);
+
+	console.log(`"Sockect clent`, socket);
 	const [content, setContent] = useState('');
 
 	const [task, setTask] = useContext(TaskContext);
@@ -15,6 +27,8 @@ function CreateTask() {
 			console.log('data>>>>', data);
 			setTask({ ...task, tasks: [data, ...task.tasks] });
 			setContent('');
+			//emit socket event
+			socket.emit('new-task', data);
 		} catch (error) {
 			console.log('error', error);
 		}

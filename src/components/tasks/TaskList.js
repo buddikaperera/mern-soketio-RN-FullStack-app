@@ -4,8 +4,9 @@ import { AuthContext } from '../../context/auth';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import axios from 'axios';
-
+import Timer from './Timer';
 import useSearch from '../../hooks/useSearch';
+import SearchBar from '../SearchBar';
 
 //dayjs.extend(require('dayjs/plugin/relativeTime'));
 dayjs.extend(relativeTime);
@@ -68,13 +69,8 @@ const TaskList = () => {
 			<div class="row">
 				<div class="col-md-6 offset-md-3">
 					<div class="m-2">
-						<input
-							type="search"
-							className="form-control"
-							placeholder="Search task"
-							value={keyword}
-							onChange={(e) => setKeyword(e.target.value)}
-						/>
+						{/*Saerch Bar*/}
+						<SearchBar keyword={keyword} setKeyword={setKeyword} />
 					</div>
 					<p
 						className="text-text-muted text-center"
@@ -101,9 +97,9 @@ const TaskList = () => {
 
 							<p
 								className="float-end"
-								style={{ fontSize: '11px', marginTop: '-14px' }}
+								style={{ fontSize: '10px', marginTop: '-14px' }}
 							>
-								{dayjs(task.createdAt).fromNow()} by{' '}
+								<Timer time={task.createdAt} /> by{' '}
 								<b>{task?.postedBy?.name}</b>
 							</p>
 						</div>

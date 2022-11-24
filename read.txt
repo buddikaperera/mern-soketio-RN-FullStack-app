@@ -18,3 +18,92 @@ use ant design modal
 >npm i antd
 https://ant.design/docs/react/introduce
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less' in index.js
+
+
+
+Socket Io get relatime feature the application 
+realtime features using sockectio
+listen to the events 
+server can broadcast events to all the connected clients ,thats why relatime
+
+in server  install npm i  socket.io
+
+in client  npm i socket.io-client
+
+same version on both sides should be otherwise problems
+server side
+
+const app = express();
+//socketio configuration
+const http = require('http').createServer(app);
+const io = require('socket.io')(http, {
+	path: '/socket.io',
+	cors: {
+		origins: 'http://localhost:3000', //'*',
+		//process.env.CLIENT_URL
+		methods: ['GET', 'POST'],
+		allowedHeaders: ['Content-Type'], //, 'Authorization'],
+	},
+});
+
+
+
+app.use('/api', authRoutes);
+app.use('/api', taskRoutes);
+
+//app.listen(8000, () => console.log('Server running on port 8000'));
+//socketio configuration
+
+io.on('connect', (socket) => {
+	console.log('socket connection =>', socket.id);
+});
+http.listen(8000, () => console.log('Server running on port 8000'));
+
+
+
+client side
+import io from 'socket.io-client';
+
+const socket = io(
+		process.env.REACT_APP_SOCKET,
+		{
+			path: '/socket.io',
+		},
+		{ reconnection: true }
+	);
+
+	console.log(`Sockect clent`, socket);
+	
+
+	on handle submit events
+		//emit socket event
+			socket.emit('new-task', data);
+
+
+
+in the server
+io.on('connect', (socket) => {
+	console.log('socket connection =>', socket.id);
+	socket.on('new-task', (task) => {
+		console.log('got new tasks ====>', task);
+		socket.broadcast.emit('new-task', task); //broadcast to all connected chanels
+		//socket.emit('new-task', task); brordcast to your self
+	});
+});
+
+//https://uploadgig.com/file/download/71CcC0bc1b7432b8/ptakj.Create.Twitter.Clone.Using.React.part2.rar
+//https://ebookee.com/Create-Twitter-Clone-Using-React_5527153.html
+//https://serbianforum.org/threads/build-chatting-app-using-laravel-socket-io.1395817/
+//https://www.youtube.com/watch?v=4aUTE3IkQQk
+///https://www.youtube.com/watch?v=UtiD7Y__32M
+//https://www.youtube.com/watch?v=RCXDlpCorhk
+//https://www.youtube.com/results?search_query=socket+io+node+js+image+upload
+client
+
+useEffect(() => {
+		socket.on('new-task', (task) => {
+			setTask((prev) => ({ ...prev, tasks: [task, ...prev.tasks] }));
+		});
+
+		return () => socket.off('new-task');
+	}, []);
