@@ -7,6 +7,7 @@ import axios from 'axios';
 import Timer from './Timer';
 import useSearch from '../../hooks/useSearch';
 import SearchBar from '../SearchBar';
+import Masonry from 'react-masonry-css';
 
 //dayjs.extend(require('dayjs/plugin/relativeTime'));
 dayjs.extend(relativeTime);
@@ -81,29 +82,47 @@ const TaskList = () => {
 					>
 						{task?.tasks.length} tasks
 					</p>
-					{filterTask?.map((task) => (
-						<div
-							key={task._id}
-							style={{
-								backgroundColor:
-									auth?.user?._id === task?.postedBy?._id
-										? '#fce5ba'
-										: '#a76846',
-							}}
-							className="rounded shadow p-2 m-2 taskList"
-							onClick={() => handleClicked(task)}
-						>
-							<p>{task.task}</p>
 
-							<p
-								className="float-end"
-								style={{ fontSize: '10px', marginTop: '-14px' }}
+					<Masonry
+						breakpointCols={2}
+						className="my-masonry-grid"
+						columnClassName="my-masonry-grid_column"
+					>
+						{filterTask?.map((task) => (
+							<div
+								key={task._id}
+								style={{
+									backgroundColor:
+										auth?.user?._id === task?.postedBy?._id
+											? '#fce5ba'
+											: '#a76846',
+								}}
+								className="rounded shadow p-2 m-2 taskList"
+								onClick={() => handleClicked(task)}
 							>
-								<Timer time={task.createdAt} /> by{' '}
-								<b>{task?.postedBy?.name}</b>
-							</p>
-						</div>
-					))}
+								<p>{task.task}</p>
+
+								<p
+									className="float-end"
+									style={{
+										fontSize: '10px',
+										marginTop: '-14px',
+									}}
+								>
+									<Timer time={task.createdAt} /> by{' '}
+									<b
+										style={{
+											fontSize: '9px',
+											marginTop: '-14px',
+										}}
+									>
+										{task?.postedBy?.name}
+									</b>
+								</p>
+							</div>
+						))}
+					</Masonry>
+
 					{task?.tasks?.length < total && (
 						<div className="text-center mt-4 mb-4">
 							<button

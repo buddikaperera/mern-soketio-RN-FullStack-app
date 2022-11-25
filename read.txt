@@ -98,6 +98,10 @@ io.on('connect', (socket) => {
 ///https://www.youtube.com/watch?v=UtiD7Y__32M
 //https://www.youtube.com/watch?v=RCXDlpCorhk
 //https://www.youtube.com/results?search_query=socket+io+node+js+image+upload
+
+//https://rapidgator.net/file/89b8395c304cfeb88fb587b33b483fa1/Build_CRUD_System_Using_React_&_PHP.rar.html
+
+
 client
 
 useEffect(() => {
@@ -107,3 +111,7 @@ useEffect(() => {
 
 		return () => socket.off('new-task');
 	}, []);
+
+
+masonary format npm i react-masonry-css
+https://www.npmjs.com/package/react-masonry-css
