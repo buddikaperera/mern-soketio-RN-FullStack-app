@@ -70,13 +70,10 @@ function Register() {
 	};
 
 	return (
-		<div
-			className="d-flex justify-content-center align-items-center vh-100"
-			style={{ marginTop: '-45px' }}
-		>
+		<div className="d-flex justify-content-center align-items-center vh-100">
 			<div className="container">
 				<div className="row">
-					<div className="col-md-6 offset-md-3">
+					<div className="col-md-6 offset-md-3 authbox mt-2">
 						<h2 className="fw-bold mb-3">Register </h2>
 						<form>
 							<Input

@@ -69,10 +69,9 @@ const TaskList = () => {
 		<div className="container mt-2">
 			<div class="row">
 				<div class="col-md-6 offset-md-3">
-					<div class="m-2">
-						{/*Saerch Bar*/}
-						<SearchBar keyword={keyword} setKeyword={setKeyword} />
-					</div>
+					{/*Saerch Bar*/}
+					<SearchBar keyword={keyword} setKeyword={setKeyword} />
+
 					<p
 						className="text-text-muted text-center"
 						style={{

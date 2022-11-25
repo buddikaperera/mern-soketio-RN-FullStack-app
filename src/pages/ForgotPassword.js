@@ -115,7 +115,7 @@ function ForgotPassword() {
 		>
 			<div className="container">
 				<div className="row">
-					<div className="col-md-6 offset-md-3">
+					<div className="col-md-6 offset-md-3 authbox">
 						<h2 className="fw-bold mb-3">Forgot Password </h2>
 						<form>
 							<Input
